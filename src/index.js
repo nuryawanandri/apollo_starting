@@ -4,9 +4,14 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import ApolloClient from 'apollo-boost'
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+const client = new ApolloClient({
+  uri: "https://48p1r2roz4.sse.codesandbox.io"
+})
+
+// or you can use `import gql from 'graphql-tag';` instead
+
+ReactDOM.render(<App client={client} />, document.getElementById('root'));
+
 serviceWorker.unregister();

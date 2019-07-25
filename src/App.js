@@ -1,25 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import ExchangeRates from './component/ExchangeRates'
 
-function App() {
+import { ApolloProvider } from 'react-apollo'
+
+function App(props) {
+  const [ currency, setCurrency ] = useState('USD')
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApolloProvider client={props.client}>
+      <div style={{
+        marginLeft: "10px"
+      }}>
+        <h2>My First Apollo app</h2>
+        <select onChange={(e) => { setCurrency(e.target.value) }}>
+          <option value="USD">USD</option>
+          <option value="IDR">IDR</option>
+        </select>
+        <div>
+          <ExchangeRates currency={currency} />
+        </div>
+      </div>
+    </ApolloProvider>
   );
 }
 
